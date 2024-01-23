@@ -12,9 +12,9 @@ public class GameOfLife {
 		//// Uncomment the test that you want to execute, and re-compile.
 		//// (Run one test at a time).
 	    test1("line.dat");
-		//// test2(fileName);
-		//// test3(fileName, 3);
-		//// play(fileName);
+	    test2("line.dat");
+		test3("line.dat", 3);
+		play("line.dat");
 	}
 	
 	// Reads the data file and prints the initial board.
@@ -27,8 +27,8 @@ public class GameOfLife {
 	// the count and cellValue functions.
 	private static void test2(String fileName) {
 		int[][] board = read(fileName);
-		int num = cellValue(board, i, j);
-		System.out.println(num);
+		//int num = cellValue(board, i, j);
+		//System.out.println(num);
 		//// Write here code that tests that the count and cellValue functions
 		//// are working properly, and returning the correct values.
 	}
@@ -67,14 +67,14 @@ public class GameOfLife {
 		int[][] board = new int[rows + 2][cols + 2];
 		int k=0;
 		for(int i=1; i<=rows; i++){
-			String string = In.readLine();
-			for(int j=1; j<=cols; j++){
+			String string = in.readLine();
+			for(int j=1; j<=cols&&k<string.length(); j++){
 				if(string.charAt(k)=='x'){
 						board[i][j] = 1;
-				}
-				else{
+				}else{
 					board[i][j] = 0;
-				}	
+				}
+				k++;	
 			}
 			k=0;
 		}	
@@ -108,15 +108,12 @@ public class GameOfLife {
 	public static int cellValue(int[][] board, int i, int j) {
 		int rows = board.length;
 		int cols = board[0].length;
-		int counter;
-		for(int i=1; i<rows-1; i++){
-			for(int j=1; j<cols-1; j++){
-				counter = count(board, i, j);
+		int counter = count(board, i, j);
 				if (board[i][j]==1){
 					if(counter<2){
 						return 0;
 					}
-					if(counter==3||counter==4){
+					if(counter==3||counter==2){
 						return 1;
 					}
 					else{
@@ -128,8 +125,6 @@ public class GameOfLife {
 						return 1;	
 					}
 				}
-			counter=0;
-		}	
 		return 0;
 	}
 	// Counts and returns the number of living neighbors of the given cell
@@ -173,7 +168,7 @@ public class GameOfLife {
 			for(int j=1; j<cols-1; j++){
 			System.out.printf("%3s", arr[i][j]);
 			}
-			System.out.printf();
+			System.out.println();
 		}	
 	}
 		
