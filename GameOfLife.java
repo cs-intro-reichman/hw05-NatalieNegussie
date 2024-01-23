@@ -11,7 +11,7 @@ public class GameOfLife {
 		String fileName = args[0];
 		//// Uncomment the test that you want to execute, and re-compile.
 		//// (Run one test at a time).
-		//// test1(fileName);
+	    test1("line.dat");
 		//// test2(fileName);
 		//// test3(fileName, 3);
 		//// play(fileName);
@@ -67,15 +67,16 @@ public class GameOfLife {
 		int[][] board = new int[rows + 2][cols + 2];
 		int k=0;
 		for(int i=1; i<=rows; i++){
+			String string = In.readLine();
 			for(int j=1; j<=cols; j++){
-				if(fileName.charAt(k)=='x'){
+				if(string.charAt(k)=='x'){
 						board[i][j] = 1;
 				}
 				else{
 					board[i][j] = 0;
 				}	
-				k++;
-			}	
+			}
+			k=0;
 		}	
 		return board;
 	}
@@ -122,8 +123,8 @@ public class GameOfLife {
 						return 0;
 					}
 				}
-				else if (board[i][j]==1){
-					if(count==3){
+				else if (board[i][j]==0){
+					if(counter==3){
 						return 1;	
 					}
 				}
@@ -131,38 +132,35 @@ public class GameOfLife {
 		}	
 		return 0;
 	}
-	
 	// Counts and returns the number of living neighbors of the given cell
 	// (The cell itself is not counted).
 	// Assumes that i is at least 1 and at most the number of rows in the board - 1. 
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	public static int count(int[][] board, int i, int j) {
-		int rows = board.length;
-		int cols = board[0].length;
 		int counter=0;
 		if(board[i][j+1]==1){
-			count++;
+			counter++;
 		}
 		if(board[i+1][j+1]==1){
-			count++;
+			counter++;
 		}
 		if(board[i-1][j+1]==1){
-			count++;
+			counter++;
 		}
 		if(board[i-1][j]==1){
-			count++;
+			counter++;
 		}
 		if(board[i+1][j]==1){
-			count++;
+			counter++;
 		}
 		if(board[i][j-1]==1){
-			count++;
+			counter++;
 		}
 		if(board[i+1][j-1]==1){
-			count++;
+			counter++;
 		}
 		if(board[i-1][j-1]==1){
-			count++;
+			counter++;
 		}		
 		return counter;
 	}
@@ -173,8 +171,9 @@ public class GameOfLife {
 		int cols = arr[0].length;
 		for(int i=1; i<rows-1; i++){
 			for(int j=1; j<cols-1; j++){
-			System.out.printf("%d", " "+arr[i][j]);
+			System.out.printf("%3s", arr[i][j]);
 			}
+			System.out.printf();
 		}	
 	}
 		
