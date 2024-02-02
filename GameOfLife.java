@@ -116,6 +116,7 @@ public class GameOfLife {
 					if(counter==3||counter==2){
 						return 1;
 					}
+						// linoy feedback: you don't need the else return 0 because you already have return 0 in the end of the function
 					else{
 						return 0;
 					}
@@ -133,6 +134,8 @@ public class GameOfLife {
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	public static int count(int[][] board, int i, int j) {
 		int counter=0;
+
+		// linoy feedback: bad function. Here you can send to an external function that gets a cell in the matrix and check ==1, then increase the counter. example below... 
 		if(board[i][j+1]==1){
 			counter++;
 		}
@@ -158,6 +161,23 @@ public class GameOfLife {
 			counter++;
 		}		
 		return counter;
+	}
+
+	public static int count(int[][] board, int i, int j) {
+		int counter=0;
+		for(int i=0;...){
+			for(int j=0; ...){
+				counter+= count(board[i][j]);
+			}
+		}
+		return counter;
+	}
+	
+	public static int count(int cell) {
+		if(cell==1){
+			return 1;
+		}
+		else return 0;
 	}
 	
 	// Prints the board. Alive and dead cells are printed as 1 and 0, respectively.
